@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi CV Profesional</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; background-color: #f4f6f9; color: #333; margin: 0; padding: 20px; }
+        .container { max-width: 850px; background: white; padding: 40px; margin: 20px auto; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        h1 { color: #0275d8; margin-bottom: 5px; }
+        h2 { color: #1c2d42; border-bottom: 2px solid #eef2f5; padding-bottom: 8px; margin-top: 30px; }
+        .project { background: #f8fbfe; border-left: 5px solid #0275d8; padding: 20px; margin-top: 15px; border-radius: 4px; }
+        .tags { font-weight: bold; color: #6c757d; font-size: 0.9em; }
+        .project-img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 4px; margin: 10px 0; display: block; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tu Nombre Completo</h1>
+        <p><strong>Especialidad:</strong> Profesional en Redes y Ciberseguridad</p>
+        <p>📧 tu-correo@email.com | 💼 ://linkedin.com</p>
+        
+        <h2>Sobre Mí</h2>
+        <p>Apasionado por la infraestructura de red, la seguridad perimetral y la administración de plataformas Fortinet. Experiencia práctica configurando firewalls, segmentación de zonas y control de acceso.</p>
+
+        <h2>Proyectos Destacados</h2>
+        <div class="project">
+            <h3>Laboratorio de Seguridad Perimetral y Segmentación con FortiGate</h3>
+            <p>Diseño e implementación desde cero de una topología de red corporativa segura utilizando GNS3 y FortiGate-VM64.</p>
+            
+            <!-- Aquí se mostrarán las imágenes que subas a tu GitHub -->
+            <img src="topologia.png" alt="Topología en GNS3" class="project-img">
+            <img src="politicas.png" alt="Políticas en FortiGate" class="project-img">
+
+            <ul>
+                <li>Segmentación estricta de zonas mediante políticas de firewall: LAN, DMZ y WAN.</li>
+                <li>Mitigación y corrección de bucles de enrutamiento presentes en diseños iniciales.</li>
+                <li>Gestión del firewall a través de CLI y entorno gráfico (GUI) mediante conexión Cloud.</li>
+                <li>Configuración de políticas de traducción de direcciones (NAT) para salida segura a Internet.</li>
+            </ul>
+            <p class="tags">🔧 Tecnologías: FortiOS, GNS3, Cisco IOSvL2, Docker (Nginx), Redes L3, NAT.</p>
+        </div>
+
+        <h2>Habilidades Técnicas</h2>
+        <ul>
+            <li><strong>Seguridad Perimetral:</strong> Firewalls Fortinet (FortiGate CLI/GUI), Políticas de seguridad, NAT.</li>
+            <li><strong>Simuladores de Red:</strong> GNS3, Cisco Packet Tracer.</li>
+            <li><strong>Networking:</strong> Enrutamiento y Conmutación (Routing & Switching), Segmentación de zonas.</li>
+            <li><strong>Sistemas:</strong> Contenedores Docker (Nginx / Web Servers).</li>
+        </ul>
+    </div>
+</body>
+</html>
