@@ -1,49 +1,54 @@
-# Laboratorio de Seguridad Perimetral y Segmentación con FortiGate-VM
+# 🛡️ Laboratorio de Seguridad Perimetral y Segmentación con FortiGate-VM
 
-Proyecto de infraestructura y seguridad de redes diseñado desde cero utilizando GNS3 para emular un entorno corporativo real y un firewall perimetral FortiGate (FortiOS 7.0). El objetivo principal es mitigar fallas de diseño comunes (bucles de enrutamiento) mediante la implementación de un modelo estricto de tres zonas de seguridad independientes.
-
-Despliegue del Portafolio Web: https://github.io
+Proyecto de infraestructura y seguridad de redes diseñado desde cero utilizando **GNS3** para emular un entorno corporativo real y un firewall perimetral **FortiGate (FortiOS 7.0)**. El objetivo principal es mitigar fallas de diseño comunes (bucles de enrutamiento) mediante la implementación de un modelo estricto de tres zonas de seguridad independientes.
 
 ---
 
-## Direccionamiento IP del Laboratorio
+## ⚙️ Direccionamiento IP del Laboratorio
 
-Zona WAN (Internet)
-* FortiGate Port1: Obtiene dirección IP automáticamente por DHCP desde el router de casa.
+### 🌐 Zona WAN (Internet)
+*   **FortiGate Port1:** Obtiene dirección IP automáticamente por DHCP desde el router de casa.
 
-Zona LAN (Clientes Internos)
-* FortiGate Port2 (Puerta de enlace): IP 192.168.10.1 con máscara 255.255.255.0
-* CLIENTE1: IP 192.168.10.10 con máscara 255.255.255.0 y puerta de enlace 192.168.10.1
-* CLIENTE2: IP 192.168.10.20 con máscara 255.255.255.0 y puerta de enlace 192.168.10.1
-* CLIENTE3: IP 192.168.10.30 con máscara 255.255.255.0 y puerta de enlace 192.168.10.1
+### 💻 Zona LAN (Clientes Internos)
+*   **FortiGate Port2 (Puerta de enlace):** IP `192.168.10.1` | Máscara `255.255.255.0`
+*   **CLIENTE1:** IP `192.168.10.10` | Máscara `255.255.255.0` | Gateway `192.168.10.1`
+*   **CLIENTE2:** IP `192.168.10.20` | Máscara `255.255.255.0` | Gateway `192.168.10.1`
+*   **CLIENTE3:** IP `192.168.10.30` | Máscara `255.255.255.0` | Gateway `192.168.10.1`
 
-Zona DMZ (Servidores)
-* FortiGate Port3 (Puerta de enlace): IP 172.16.10.1 con máscara 255.255.255.0
-* SERV-WEB (Contenedor Docker): IP 172.16.10.10 con máscara 255.255.255.0 y puerta de enlace 172.16.10.1
+### 🖥️ Zona DMZ (Servidores)
+*   **FortiGate Port3 (Puerta de enlace):** IP `172.16.10.1` | Máscara `255.255.255.0`
+*   **SERV-WEB (Contenedor Docker):** IP `172.16.10.10` | Máscara `255.255.255.0` | Gateway `172.16.10.1`
 
 ---
 
-## Configuración de los Clientes (VPCS)
+## 🖥️ Configuración de los Clientes (VPCS)
 
-Comandos ejecutados en la consola de cada equipo:
+Comandos ejecutados en la consola de cada equipo para asignación estática y persistencia de datos:
 
-CLIENTE1:
+### ⚙️ CLIENTE 1
+```bash
 ip 192.168.10.10 255.255.255.0 192.168.10.1
 save
+```
 
-CLIENTE2:
+### ⚙️ CLIENTE 2
+```bash
 ip 192.168.10.20 255.255.255.0 192.168.10.1
 save
+```
 
-CLIENTE3:
+### ⚙️ CLIENTE 3
+```bash
 ip 192.168.10.30 255.255.255.0 192.168.10.1
 save
+```
 
 ---
 
-## Configuración del Firewall FortiGate (CLI)
+## 🚀 Configuración del Firewall FortiGate (CLI)
 
-### 1. Configuración de Interfaces
+### 📂 1. Aprovisionamiento de Interfaces lógicas
+```yaml
 config system interface
     edit port1
         set mode dhcp
@@ -60,8 +65,10 @@ config system interface
         set allowaccess ping http https
     next
 end
+```
 
-### 2. Políticas de Seguridad y NAT
+### 🔐 2. Políticas de Seguridad Perimetral y Traducción de Direcciones (NAT)
+```yaml
 config firewall policy
     edit 1
         set name "LAN_a_DMZ"
@@ -85,14 +92,18 @@ config firewall policy
         set nat enable
     next
 end
+```
 
 ---
 
-## Pruebas de Verificación de Tráfico
+## 🧪 Pruebas de Verificación de Tráfico
 
-Validación realizada desde la consola del CLIENTE1:
-1. Conectividad local hacia la DMZ: ping 172.16.10.10 exitoso.
-2. Petición de servicios web: rlogin 172.16.10.10 80 con respuesta HTTP del contenedor Docker.
-3. Salida a internet con NAT: ping 8.8.8.8 exitoso.
+Validación de conectividad de extremo a extremo realizada de manera exitosa desde la consola del **CLIENTE1**:
 
-Tecnologías utilizadas: Fortinet FortiOS, GNS3 Simulator, Docker Containers, Redes L3, NAT.
+1.  **Conectividad local hacia la DMZ:** `ping 172.16.10.10` con respuesta inmediata de paquetes.
+2.  **Petición de servicios web:** `rlogin 172.16.10.10 80` estableciendo enlace HTTP correcto con el contenedor Docker.
+3.  **Salida a internet con NAT:** `ping 8.8.8.8` verificando la correcta traducción de direccionamiento público.
+
+---
+🛠️ **Tecnologías implementadas:** Fortinet FortiOS, GNS3 Simulator, Docker Containers, Redes L3, Network Address Translation (NAT).
+
